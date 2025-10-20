@@ -1,0 +1,247 @@
+[17:06:14] SISTEMA: Cambiado planificador a: FCFS - Sistema
+[18:48:56] MEMORIA: Proceso cargado en memoria - Proceso1 (P1) - PC: 0/10 - Estado: NUEVO
+[18:48:56] SISTEMA: Proceso agregado a cola de listos - Proceso1 (P1) - PC: 0/10 - Estado: LISTO
+[18:49:02] SISTEMA: Simulación iniciada - Sistema
+[18:49:02] INTERFAZ: Simulación iniciada por usuario - Sistema
+[18:49:03] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 0/10 - Estado: LISTO
+[18:49:04] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 1/10 - Estado: LISTO
+[18:49:05] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 2/10 - Estado: LISTO
+[18:49:06] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 3/10 - Estado: LISTO
+[18:49:07] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 4/10 - Estado: LISTO
+[18:49:08] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 5/10 - Estado: LISTO
+[18:49:09] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 6/10 - Estado: LISTO
+[18:49:10] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 7/10 - Estado: LISTO
+[18:49:11] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 8/10 - Estado: LISTO
+[18:49:12] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 9/10 - Estado: LISTO
+[18:49:12] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:13] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:13] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:14] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:14] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:15] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:15] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:16] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:16] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:17] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:17] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:18] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:18] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:19] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:19] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:20] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:20] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:21] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:21] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:22] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:22] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:23] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:23] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:24] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:24] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:25] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:25] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:26] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:26] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:27] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:27] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:28] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:28] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:29] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:29] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:30] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:30] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:31] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:31] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:32] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:32] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:33] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:33] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:34] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:34] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:35] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:35] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:36] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:36] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:37] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:37] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:38] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:38] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:39] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:39] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:40] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:40] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:40] SISTEMA: Simulación pausada - Sistema
+[18:49:45] SISTEMA: Simulación reanudada - Sistema
+[18:49:45] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:45] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:45] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:45] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:46] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:47] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:48] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:49] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:50] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:51] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:52] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:53] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:53] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:54] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:54] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:55] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:55] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:56] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:56] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:57] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:57] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:58] SISTEMA: Cambiado planificador a: SJF - Sistema
+[18:49:59] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:59] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:49:59] SISTEMA: Simulación pausada - Sistema
+[18:50:01] SISTEMA: Simulación iniciada - Sistema
+[18:50:01] INTERFAZ: Simulación iniciada por usuario - Sistema
+[18:50:01] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:01] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:02] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:02] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:03] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:03] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:04] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:04] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:05] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:05] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:06] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:06] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:07] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:07] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:08] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:08] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:09] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:09] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:10] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:10] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:11] PLANIFICADOR: SJF selecciona: Proceso1 (instrucciones restantes: 0) - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:11] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[18:50:12] SISTEMA: Simulación pausada - Sistema
