@@ -13,14 +13,14 @@ import persistencia.Logger;
 public class NucleoSistema {
     private static NucleoSistema instancia;
     
-    private GestorColas gestorColas;
-    private GestorHilos gestorHilos;
-    private GestorExcepciones gestorExcepciones;
-    private GestorMemoria gestorMemoria;
+    private final GestorColas gestorColas;
+    private final GestorHilos gestorHilos;
+    private final GestorExcepciones gestorExcepciones;
+    private final GestorMemoria gestorMemoria;
     private Planificador planificadorActual;
     private Configuracion configuracion;
-    private Metricas metricas;
-    private Reloj reloj;
+    private final Metricas metricas;
+    private final Reloj reloj;
     
     private Proceso procesoEjecutando;
     private int cicloActual;
@@ -92,23 +92,41 @@ public class NucleoSistema {
     }
     
     private void ejecutarProcesoActual() {
-        procesoEjecutando.ejecutarInstruccion();
-        
-        if (procesoEjecutando.debeGenerarExcepcion()) {
-            gestorColas.bloquearProceso(procesoEjecutando);
-            gestorExcepciones.manejarExcepcionIO(procesoEjecutando);
-            procesoEjecutando = null;
-            return;
+        try {
+            procesoEjecutando.ejecutarInstruccion();
+            
+            if (procesoEjecutando.debeGenerarExcepcion()) {
+                gestorColas.bloquearProceso(procesoEjecutando);
+                
+                // Verificar que el gestor de excepciones esté activo antes de usarlo
+                if (gestorExcepciones.isActivo()) {
+                    gestorExcepciones.manejarExcepcionIO(procesoEjecutando);
+                } else {
+                    System.err.println("GestorExcepciones no activo, no se puede manejar E/S para: " + procesoEjecutando.getId());
+                }
+                
+                procesoEjecutando = null;
+                return;
+            }
+            
+            if (procesoEjecutando.estaTerminado()) {
+                gestorColas.terminarProceso(procesoEjecutando);
+                procesoEjecutando = null;
+            }
+            
+            metricas.actualizarMetricas(cicloActual, 0, 
+                gestorColas.getProcesosTerminados().size(), 
+                calcularTiempoRespuestaPromedio());
+                
+        } catch (Exception e) {
+            System.err.println("Error ejecutando proceso actual: " + e.getMessage());
+            // En caso de error, devolver el proceso a la cola de listos
+            if (procesoEjecutando != null) {
+                procesoEjecutando.setEstado(EstadoProceso.LISTO);
+                gestorColas.agregarProceso(procesoEjecutando);
+                procesoEjecutando = null;
+            }
         }
-        
-        if (procesoEjecutando.estaTerminado()) {
-            gestorColas.terminarProceso(procesoEjecutando);
-            procesoEjecutando = null;
-        }
-        
-        metricas.actualizarMetricas(cicloActual, 0, 
-            gestorColas.getProcesosTerminados().size(), 
-            calcularTiempoRespuestaPromedio());
     }
     
     private double calcularTiempoRespuestaPromedio() {
@@ -193,9 +211,34 @@ public class NucleoSistema {
     
     public void shutdown() {
         simulacionActiva = false;
-        reloj.detener();
-        gestorHilos.shutdown();
-        gestorExcepciones.shutdown();
+        
+        // Detener el reloj primero
+        if (reloj != null) {
+            reloj.detener();
+        }
+        
+        // Limpiar proceso actual
+        if (procesoEjecutando != null) {
+            procesoEjecutando.setEstado(EstadoProceso.LISTO);
+            gestorColas.agregarProceso(procesoEjecutando);
+            procesoEjecutando = null;
+        }
+        
+        // Cerrar gestores en orden
+        if (gestorExcepciones != null) {
+            gestorExcepciones.shutdown();
+        }
+        
+        if (gestorHilos != null) {
+            gestorHilos.shutdown();
+        }
+        
+        // Guardar configuración
+        guardarConfiguracion();
+        
+        // Cerrar logger
         Logger.getInstance().close();
+        
+        Logger.getInstance().logEvento(new Evento("SISTEMA", "Sistema apagado correctamente", null));
     }
 }

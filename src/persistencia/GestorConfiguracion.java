@@ -19,18 +19,35 @@ public class GestorConfiguracion {
     
     public Configuracion cargarConfiguracion(String ruta) {
         try {
-            String contenido = new String(Files.readAllBytes(Paths.get(ruta)));
+            // Verificar si la ruta es relativa y ajustarla
+            File archivoConfig = new File(ruta);
+            if (!archivoConfig.exists()) {
+                // Intentar con ruta desde el directorio del proyecto
+                archivoConfig = new File("./" + ruta);
+            }
+            if (!archivoConfig.exists()) {
+                System.err.println("Archivo de configuración no encontrado: " + ruta);
+                System.err.println("Buscando en: " + archivoConfig.getAbsolutePath());
+                return new Configuracion(); // Configuración por defecto
+            }
+            
+            String contenido = new String(Files.readAllBytes(archivoConfig.toPath()));
             return parsearJSON(contenido);
         } catch (IOException e) {
             System.err.println("Error cargando configuración: " + e.getMessage());
-            return new Configuracion();
+            return new Configuracion(); // Configuración por defecto
         }
     }
     
     public void guardarConfiguracion(Configuracion config, String ruta) {
         try {
+            File archivoConfig = new File(ruta);
+            // Crear directorio si no existe
+            archivoConfig.getParentFile().mkdirs();
+            
             String json = convertirAJSON(config);
-            Files.write(Paths.get(ruta), json.getBytes());
+            Files.write(archivoConfig.toPath(), json.getBytes());
+            System.out.println("Configuración guardada en: " + archivoConfig.getAbsolutePath());
         } catch (IOException e) {
             System.err.println("Error guardando configuración: " + e.getMessage());
         }

@@ -6,13 +6,15 @@ package nucleo;
 
 public class Reloj implements Runnable {
     private long duracionCiclo;
-    private boolean activo;
+    private volatile boolean activo;
     private NucleoSistema nucleo;
+    private Thread hiloReloj;
     
     public Reloj(NucleoSistema nucleo, long duracionCiclo) {
         this.nucleo = nucleo;
         this.duracionCiclo = duracionCiclo;
         this.activo = false;
+        this.hiloReloj = null;
     }
     
     @Override
@@ -24,8 +26,12 @@ public class Reloj implements Runnable {
                     nucleo.ejecutarCiclo();
                 }
             } catch (InterruptedException e) {
+                System.out.println("Reloj interrumpido");
                 Thread.currentThread().interrupt();
                 break;
+            } catch (Exception e) {
+                System.err.println("Error en el reloj: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -33,15 +39,29 @@ public class Reloj implements Runnable {
     public void iniciar() {
         if (!activo) {
             activo = true;
-            new Thread(this).start();
+            hiloReloj = new Thread(this, "Reloj-Simulacion");
+            hiloReloj.start();
         }
     }
     
     public void detener() {
         activo = false;
+        if (hiloReloj != null) {
+            hiloReloj.interrupt();
+            try {
+                hiloReloj.join(1000); // Esperar máximo 1 segundo
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            hiloReloj = null;
+        }
     }
     
     public void setDuracionCiclo(long duracion) {
         this.duracionCiclo = duracion;
+    }
+    
+    public boolean isActivo() {
+        return activo;
     }
 }

@@ -14,20 +14,31 @@ import modelo.Proceso;
 import java.util.concurrent.*;
 
 public class GestorHilos {
-    private ExecutorService executor;
-    private ConcurrentHashMap<String, Future<?>> hilosProcesos;
-    private ConcurrentHashMap<String, Proceso> procesosEjecutando;
+    private final ExecutorService executor;
+    private final ConcurrentHashMap<String, Future<?>> hilosProcesos;
+    private final ConcurrentHashMap<String, Proceso> procesosEjecutando;
+    private volatile boolean activo;
     
     public GestorHilos() {
         this.executor = Executors.newCachedThreadPool();
         this.hilosProcesos = new ConcurrentHashMap<>();
         this.procesosEjecutando = new ConcurrentHashMap<>();
+        this.activo = true;
     }
     
     public void ejecutarProceso(Proceso proceso, Runnable tarea) {
-        Future<?> future = executor.submit(tarea);
-        hilosProcesos.put(proceso.getId(), future);
-        procesosEjecutando.put(proceso.getId(), proceso);
+        if (!activo) {
+            System.err.println("GestorHilos no está activo, no se puede ejecutar proceso: " + proceso.getId());
+            return;
+        }
+        
+        try {
+            Future<?> future = executor.submit(tarea);
+            hilosProcesos.put(proceso.getId(), future);
+            procesosEjecutando.put(proceso.getId(), proceso);
+        } catch (RejectedExecutionException e) {
+            System.err.println("No se pudo ejecutar proceso - Executor cerrado: " + e.getMessage());
+        }
     }
     
     public void detenerProceso(String procesoId) {
@@ -45,14 +56,32 @@ public class GestorHilos {
     }
     
     public void shutdown() {
-        executor.shutdownNow();
-        try {
-            if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
-                executor.shutdownNow();
+        activo = false;
+        
+        // Cancelar todas las tareas pendientes
+        for (Future<?> future : hilosProcesos.values()) {
+            if (future != null && !future.isDone()) {
+                future.cancel(true);
             }
-        } catch (InterruptedException e) {
-            executor.shutdownNow();
-            Thread.currentThread().interrupt();
         }
+        hilosProcesos.clear();
+        procesosEjecutando.clear();
+        
+        // Cerrar el executor
+        if (executor != null) {
+            executor.shutdownNow();
+            try {
+                if (!executor.awaitTermination(3, TimeUnit.SECONDS)) {
+                    System.err.println("Timeout esperando por cierre de GestorHilos");
+                }
+            } catch (InterruptedException e) {
+                executor.shutdownNow();
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+    
+    public boolean isActivo() {
+        return activo;
     }
 }
