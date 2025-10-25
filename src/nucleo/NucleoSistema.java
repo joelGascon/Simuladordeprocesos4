@@ -13,19 +13,20 @@ import persistencia.Logger;
 public class NucleoSistema {
     private static NucleoSistema instancia;
     
-    private final GestorColas gestorColas;
-    private final GestorHilos gestorHilos;
-    private final GestorExcepciones gestorExcepciones;
-    private final GestorMemoria gestorMemoria;
+    private GestorColas gestorColas;
+    private GestorHilos gestorHilos;
+    private GestorExcepciones gestorExcepciones;
+    private GestorMemoria gestorMemoria;
     private Planificador planificadorActual;
     private Configuracion configuracion;
-    private final Metricas metricas;
-    private final Reloj reloj;
+    private Metricas metricas;
+    private Reloj reloj;
     
     private Proceso procesoEjecutando;
     private int cicloActual;
     private boolean ejecutandoSO;
     private boolean simulacionActiva;
+    private int contadorQuantum;
     
     private NucleoSistema() {
         this.configuracion = new Configuracion();
@@ -37,6 +38,7 @@ public class NucleoSistema {
         this.cicloActual = 0;
         this.ejecutandoSO = false;
         this.simulacionActiva = false;
+        this.contadorQuantum = 0;
         
         cargarConfiguracion();
         cambiarPlanificador(configuracion.getTipoPlanificador());
@@ -75,13 +77,17 @@ public class NucleoSistema {
         
         gestorColas.actualizarTiemposEspera();
         
+        // Seleccionar siguiente proceso a ejecutar
         if (procesoEjecutando == null || procesoEjecutando.getEstado() != EstadoProceso.EJECUTANDO) {
             procesoEjecutando = planificadorActual.seleccionarSiguiente();
+            contadorQuantum = 0;
         }
         
+        // Ejecutar proceso actual
         if (procesoEjecutando != null) {
             ejecutarProcesoActual();
         } else {
+            // CPU ociosa
             metricas.actualizarMetricas(cicloActual, 1, 
                 gestorColas.getProcesosTerminados().size(), 
                 calcularTiempoRespuestaPromedio());
@@ -94,37 +100,58 @@ public class NucleoSistema {
     private void ejecutarProcesoActual() {
         try {
             procesoEjecutando.ejecutarInstruccion();
+            contadorQuantum++;
             
+            // Verificar si genera excepción de E/S
             if (procesoEjecutando.debeGenerarExcepcion()) {
                 gestorColas.bloquearProceso(procesoEjecutando);
                 
-                // Verificar que el gestor de excepciones esté activo antes de usarlo
                 if (gestorExcepciones.isActivo()) {
                     gestorExcepciones.manejarExcepcionIO(procesoEjecutando);
-                } else {
-                    System.err.println("GestorExcepciones no activo, no se puede manejar E/S para: " + procesoEjecutando.getId());
                 }
                 
                 procesoEjecutando = null;
+                contadorQuantum = 0;
                 return;
             }
             
+            // Verificar si terminó
             if (procesoEjecutando.estaTerminado()) {
                 gestorColas.terminarProceso(procesoEjecutando);
                 procesoEjecutando = null;
+                contadorQuantum = 0;
             }
             
+            // Manejo especial para planificadores multinivel
+            manejarPlanificadoresEspeciales();
+            
+            // Actualizar métricas
             metricas.actualizarMetricas(cicloActual, 0, 
                 gestorColas.getProcesosTerminados().size(), 
                 calcularTiempoRespuestaPromedio());
                 
         } catch (Exception e) {
             System.err.println("Error ejecutando proceso actual: " + e.getMessage());
-            // En caso de error, devolver el proceso a la cola de listos
             if (procesoEjecutando != null) {
                 procesoEjecutando.setEstado(EstadoProceso.LISTO);
                 gestorColas.agregarProceso(procesoEjecutando);
                 procesoEjecutando = null;
+                contadorQuantum = 0;
+            }
+        }
+    }
+    
+    private void manejarPlanificadoresEspeciales() {
+        // Manejo para Multinivel
+        if (planificadorActual instanceof MultinivelPlanificador) {
+            MultinivelPlanificador ml = (MultinivelPlanificador) planificadorActual;
+            int nivel = (procesoEjecutando != null) ? procesoEjecutando.getPrioridad() : 0;
+            int quantumNivel = ml.getQuantumParaNivel(nivel);
+            
+            if (quantumNivel > 0 && contadorQuantum >= quantumNivel && !procesoEjecutando.estaTerminado()) {
+                ml.devolverProceso(procesoEjecutando, false);
+                procesoEjecutando = null;
+                contadorQuantum = 0;
             }
         }
     }
@@ -141,19 +168,36 @@ public class NucleoSistema {
     }
     
     public void cambiarPlanificador(String tipo) {
+        // Reiniciar contadores
+        procesoEjecutando = null;
+        contadorQuantum = 0;
+        
         switch (tipo.toUpperCase()) {
             case "FCFS":
                 planificadorActual = new FCFSPlanificador(gestorColas);
                 break;
+            case "SPN":
             case "SJF":
                 planificadorActual = new SJFPlanificador(gestorColas);
                 break;
+            case "SRT":
+                planificadorActual = new SRTPlanificador(gestorColas);
+                break;
             case "ROUNDROBIN":
+            case "RR":
                 planificadorActual = new RoundRobinPlanificador(gestorColas, configuracion.getQuantumRR());
+                break;
+            case "HRRN":
+                planificadorActual = new HRRNPlanificador(gestorColas);
                 break;
             case "PRIORIDADES":
                 planificadorActual = new PrioridadesPlanificador(gestorColas);
                 break;
+            case "MULTINIVEL":
+                planificadorActual = new MultinivelPlanificador(gestorColas);
+                break;
+            case "MULTINIVEL_REALIMENTACION":
+                planificadorActual = new MultinivelRealimentacionPlanificador(gestorColas);               break;
             default:
                 planificadorActual = new FCFSPlanificador(gestorColas);
         }
@@ -201,6 +245,7 @@ public class NucleoSistema {
     public int getCicloActual() { return cicloActual; }
     public boolean isEjecutandoSO() { return ejecutandoSO; }
     public boolean isSimulacionActiva() { return simulacionActiva; }
+    public int getContadorQuantum() { return contadorQuantum; }
     
     // Setters
     public void setSimulacionActiva(boolean activa) { this.simulacionActiva = activa; }
