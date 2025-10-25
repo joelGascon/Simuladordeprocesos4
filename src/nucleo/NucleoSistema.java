@@ -17,6 +17,7 @@ public class NucleoSistema {
     private GestorHilos gestorHilos;
     private GestorExcepciones gestorExcepciones;
     private GestorMemoria gestorMemoria;
+    private GestorSemaforos gestorSemaforos;
     private Planificador planificadorActual;
     private Configuracion configuracion;
     private Metricas metricas;
@@ -30,6 +31,10 @@ public class NucleoSistema {
     
     private NucleoSistema() {
         this.configuracion = new Configuracion();
+        
+        // Inicializar semáforos primero
+        this.gestorSemaforos = GestorSemaforos.getInstance(configuracion.getMaxProcesosMemoria());
+        
         this.gestorColas = new GestorColas();
         this.gestorHilos = new GestorHilos();
         this.gestorExcepciones = new GestorExcepciones();
@@ -72,29 +77,47 @@ public class NucleoSistema {
     public void ejecutarCiclo() {
         if (!simulacionActiva) return;
         
-        cicloActual++;
-        ejecutandoSO = true;
-        
-        gestorColas.actualizarTiemposEspera();
-        
-        // Seleccionar siguiente proceso a ejecutar
-        if (procesoEjecutando == null || procesoEjecutando.getEstado() != EstadoProceso.EJECUTANDO) {
-            procesoEjecutando = planificadorActual.seleccionarSiguiente();
-            contadorQuantum = 0;
+        try {
+            gestorSemaforos.adquirirEjecucion();
+            
+            cicloActual++;
+            ejecutandoSO = true;
+            
+            gestorColas.actualizarTiemposEspera();
+            
+            // Intentar adquirir CPU para ejecución
+            if (gestorSemaforos.adquirirCPU()) {
+                try {
+                    // Seleccionar siguiente proceso a ejecutar
+                    if (procesoEjecutando == null || procesoEjecutando.getEstado() != EstadoProceso.EJECUTANDO) {
+                        procesoEjecutando = planificadorActual.seleccionarSiguiente();
+                        contadorQuantum = 0;
+                    }
+                    
+                    // Ejecutar proceso actual
+                    if (procesoEjecutando != null) {
+                        ejecutarProcesoActual();
+                    } else {
+                        // CPU ociosa
+                        metricas.actualizarMetricas(cicloActual, 1, 
+                            gestorColas.getProcesosTerminados().size(), 
+                            calcularTiempoRespuestaPromedio());
+                    }
+                    
+                } finally {
+                    gestorSemaforos.liberarCPU();
+                }
+            }
+            
+            ejecutandoSO = false;
+            planificadorActual.ejecutarCiclo();
+            
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Interrupción en ciclo de ejecución: " + e.getMessage());
+        } finally {
+            gestorSemaforos.liberarEjecucion();
         }
-        
-        // Ejecutar proceso actual
-        if (procesoEjecutando != null) {
-            ejecutarProcesoActual();
-        } else {
-            // CPU ociosa
-            metricas.actualizarMetricas(cicloActual, 1, 
-                gestorColas.getProcesosTerminados().size(), 
-                calcularTiempoRespuestaPromedio());
-        }
-        
-        ejecutandoSO = false;
-        planificadorActual.ejecutarCiclo();
     }
     
     private void ejecutarProcesoActual() {
@@ -122,8 +145,16 @@ public class NucleoSistema {
                 contadorQuantum = 0;
             }
             
-            // Manejo especial para planificadores multinivel
-            manejarPlanificadoresEspeciales();
+            // Manejo especial para Round Robin
+            if (planificadorActual instanceof RoundRobinPlanificador) {
+                if (contadorQuantum >= configuracion.getQuantumRR() && !procesoEjecutando.estaTerminado()) {
+                    // Devolver proceso a la cola si agotó quantum
+                    procesoEjecutando.setEstado(EstadoProceso.LISTO);
+                    gestorColas.agregarProceso(procesoEjecutando);
+                    procesoEjecutando = null;
+                    contadorQuantum = 0;
+                }
+            }
             
             // Actualizar métricas
             metricas.actualizarMetricas(cicloActual, 0, 
@@ -135,21 +166,6 @@ public class NucleoSistema {
             if (procesoEjecutando != null) {
                 procesoEjecutando.setEstado(EstadoProceso.LISTO);
                 gestorColas.agregarProceso(procesoEjecutando);
-                procesoEjecutando = null;
-                contadorQuantum = 0;
-            }
-        }
-    }
-    
-    private void manejarPlanificadoresEspeciales() {
-        // Manejo para Multinivel
-        if (planificadorActual instanceof MultinivelPlanificador) {
-            MultinivelPlanificador ml = (MultinivelPlanificador) planificadorActual;
-            int nivel = (procesoEjecutando != null) ? procesoEjecutando.getPrioridad() : 0;
-            int quantumNivel = ml.getQuantumParaNivel(nivel);
-            
-            if (quantumNivel > 0 && contadorQuantum >= quantumNivel && !procesoEjecutando.estaTerminado()) {
-                ml.devolverProceso(procesoEjecutando, false);
                 procesoEjecutando = null;
                 contadorQuantum = 0;
             }
@@ -193,11 +209,6 @@ public class NucleoSistema {
             case "PRIORIDADES":
                 planificadorActual = new PrioridadesPlanificador(gestorColas);
                 break;
-            case "MULTINIVEL":
-                planificadorActual = new MultinivelPlanificador(gestorColas);
-                break;
-            case "MULTINIVEL_REALIMENTACION":
-                planificadorActual = new MultinivelRealimentacionPlanificador(gestorColas);               break;
             default:
                 planificadorActual = new FCFSPlanificador(gestorColas);
         }
@@ -207,18 +218,30 @@ public class NucleoSistema {
     }
     
     public void agregarProceso(Proceso proceso) {
-        if (gestorMemoria.puedeCargarProceso()) {
-            gestorMemoria.cargarProceso(proceso);
-            gestorColas.agregarProceso(proceso);
-            planificadorActual.agregarProceso(proceso);
+        // Usar semáforo de memoria para controlar carga de procesos
+        if (gestorSemaforos.adquirirMemoria()) {
+            try {
+                gestorMemoria.cargarProceso(proceso);
+                gestorColas.agregarProceso(proceso);
+                planificadorActual.agregarProceso(proceso);
+            } catch (Exception e) {
+                gestorSemaforos.liberarMemoria(); // Liberar si hay error
+                throw e;
+            }
         } else {
+            // No hay espacio en memoria, intentar suspender algún proceso
             Proceso procesoSuspender = gestorMemoria.seleccionarProcesoSuspender();
             if (procesoSuspender != null) {
                 gestorColas.suspenderProceso(procesoSuspender);
                 gestorMemoria.descargarProceso(procesoSuspender);
-                gestorMemoria.cargarProceso(proceso);
-                gestorColas.agregarProceso(proceso);
-                planificadorActual.agregarProceso(proceso);
+                gestorSemaforos.liberarMemoria(); // Liberar el espacio
+                
+                // Ahora intentar cargar el nuevo proceso
+                if (gestorSemaforos.adquirirMemoria()) {
+                    gestorMemoria.cargarProceso(proceso);
+                    gestorColas.agregarProceso(proceso);
+                    planificadorActual.agregarProceso(proceso);
+                }
             }
         }
     }
@@ -246,6 +269,7 @@ public class NucleoSistema {
     public boolean isEjecutandoSO() { return ejecutandoSO; }
     public boolean isSimulacionActiva() { return simulacionActiva; }
     public int getContadorQuantum() { return contadorQuantum; }
+    public GestorSemaforos getGestorSemaforos() { return gestorSemaforos; }
     
     // Setters
     public void setSimulacionActiva(boolean activa) { this.simulacionActiva = activa; }
@@ -276,6 +300,11 @@ public class NucleoSistema {
         
         if (gestorHilos != null) {
             gestorHilos.shutdown();
+        }
+        
+        // Reiniciar semáforos
+        if (gestorSemaforos != null) {
+            gestorSemaforos.reiniciar();
         }
         
         // Guardar configuración

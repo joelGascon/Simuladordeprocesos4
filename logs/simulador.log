@@ -789,3 +789,10 @@
 [20:33:55] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
 [20:33:57] PLANIFICADOR: FCFS selecciona: Proceso1 - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
 [20:33:57] TERMINACION: Proceso terminado - Proceso1 (P1) - PC: 10/10 - Estado: TERMINADO
+[14:34:43] SISTEMA: Cambiado planificador a: FCFS - Sistema
+[14:34:43] SISTEMA: Cambiado planificador a: FCFS - Sistema
+[14:34:47] SISTEMA: Simulación iniciada - Sistema
+[14:34:47] INTERFAZ: Simulación iniciada por usuario - Sistema
+[14:34:48] SISTEMA: Simulación pausada - Sistema
+[14:34:50] SISTEMA: Simulación iniciada - Sistema
+[14:34:50] INTERFAZ: Simulación iniciada por usuario - Sistema

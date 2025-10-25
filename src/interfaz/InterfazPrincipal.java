@@ -7,8 +7,7 @@ package interfaz;
 import modelo.*;
 import nucleo.NucleoSistema;
 import persistencia.Logger;
-import planificadores.MultinivelPlanificador;
-import planificadores.MultinivelRealimentacionPlanificador;
+import planificadores.RoundRobinPlanificador;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +24,7 @@ public class InterfazPrincipal extends JFrame {
     private PanelColas panelColas;
     private PanelMetricas panelMetricas;
     private PanelConfiguracion panelConfiguracion;
+    private PanelGraficas panelGraficas; // NUEVO: Panel de gráficas
     
     // Componentes de la barra de control
     private JButton btnIniciar, btnPausar, btnReanudar, btnDetener;
@@ -49,6 +49,7 @@ public class InterfazPrincipal extends JFrame {
         panelColas = new PanelColas();
         panelMetricas = new PanelMetricas();
         panelConfiguracion = new PanelConfiguracion(this);
+        panelGraficas = new PanelGraficas(); // NUEVO: Inicializar panel de gráficas
         
         // Panel superior (ejecución y control)
         JPanel panelSuperior = new JPanel(new BorderLayout());
@@ -60,10 +61,11 @@ public class InterfazPrincipal extends JFrame {
         panelCentral.add(panelColas);
         panelCentral.add(crearPanelLog());
         
-        // Panel inferior (métricas y configuración)
-        JPanel panelInferior = new JPanel(new GridLayout(1, 2));
+        // Panel inferior (métricas, configuración y gráficas)
+        JPanel panelInferior = new JPanel(new GridLayout(1, 3));
         panelInferior.add(panelMetricas);
         panelInferior.add(panelConfiguracion);
+        panelInferior.add(panelGraficas); // NUEVO: Agregar gráficas
         
         // Agregar todos los paneles
         add(panelSuperior, BorderLayout.NORTH);
@@ -80,7 +82,7 @@ public class InterfazPrincipal extends JFrame {
         timer.start();
         
         pack();
-        setSize(1400, 900);
+        setSize(1600, 1000); // Aumentado para incluir gráficas
         setLocationRelativeTo(null);
     }
     
@@ -117,12 +119,12 @@ public class InterfazPrincipal extends JFrame {
         btnReanudar.addActionListener(e -> reanudarSimulacion());
         btnDetener.addActionListener(e -> detenerSimulacion());
         
-        // Selector de planificador
+        // Selector de planificador (SIN MULTINIVEL)
         JPanel panelPlanificador = new JPanel(new FlowLayout());
         panelPlanificador.add(new JLabel("Planificador:"));
         comboPlanificadores = new JComboBox<>(new String[]{
-            "FCFS", "SPN", "SRT", "Round Robin", "HRRN", 
-            "Prioridades", "Multinivel", "Multinivel Realimentación"
+            "FCFS", "SPN", "SRT", "Round Robin", "HRRN", "Prioridades"
+            // ELIMINADOS: "Multinivel", "Multinivel Realimentación"
         });
         comboPlanificadores.setFont(new Font("Arial", Font.PLAIN, 12));
         comboPlanificadores.addActionListener(e -> cambiarPlanificador());
@@ -237,6 +239,7 @@ public class InterfazPrincipal extends JFrame {
                 nucleo.shutdown();
                 // Reiniciar el núcleo
                 nucleo = NucleoSistema.getInstance();
+                panelGraficas.limpiar(); // NUEVO: Limpiar gráficas al detener
                 actualizarEstadoBoton();
                 JOptionPane.showMessageDialog(this, 
                     "Simulación detenida y sistema reiniciado", 
@@ -280,14 +283,7 @@ public class InterfazPrincipal extends JFrame {
                     tipo = "PRIORIDADES";
                     descripcion = "Por Prioridades - Mayor prioridad primero";
                     break;
-                case "Multinivel": 
-                    tipo = "MULTINIVEL";
-                    descripcion = "Colas Multinivel - Múltiples colas con diferentes algoritmos";
-                    break;
-                case "Multinivel Realimentación": 
-                    tipo = "MULTINIVEL_REALIMENTACION";
-                    descripcion = "Multinivel con Realimentación - Procesos bajan de nivel";
-                    break;
+                // ELIMINADOS: casos de Multinivel y Multinivel Realimentación
             }
             
             nucleo.cambiarPlanificador(tipo);
@@ -339,6 +335,7 @@ public class InterfazPrincipal extends JFrame {
             panelEjecucion.actualizar();
             panelColas.actualizar();
             panelMetricas.actualizar();
+            panelGraficas.actualizar(); // NUEVO: Actualizar gráficas
             
             // Actualizar estado del sistema operativo
             boolean ejecutandoSO = nucleo.isEjecutandoSO();
@@ -356,26 +353,17 @@ public class InterfazPrincipal extends JFrame {
     }
     
     private void actualizarInfoEspecificaPlanificador() {
-        // Información adicional para planificadores especiales
-        if (nucleo.getPlanificadorActual() instanceof MultinivelPlanificador) {
-            MultinivelPlanificador ml = (MultinivelPlanificador) nucleo.getPlanificadorActual();
-            List<String> estados = ml.getEstadoColas();
-            String infoExtra = " | Colas: " + String.join(", ", estados);
-            lblInfoPlanificador.setText(lblInfoPlanificador.getText().split(" \\| ")[0] + infoExtra);
-        }
-        else if (nucleo.getPlanificadorActual() instanceof MultinivelRealimentacionPlanificador) {
-            MultinivelRealimentacionPlanificador mlr = (MultinivelRealimentacionPlanificador) nucleo.getPlanificadorActual();
-            List<String> estados = mlr.getEstadoColas();
-            String infoExtra = " | Quantum: " + mlr.getQuantumActual() + 
-                              "/" + mlr.getContadorQuantum() +
-                              " | Nivel: " + mlr.getNivelActual();
-            lblInfoPlanificador.setText(lblInfoPlanificador.getText().split(" \\| ")[0] + infoExtra);
-        }
-        else if (nucleo.getPlanificadorActual() instanceof planificadores.RoundRobinPlanificador) {
+        // SOLO información para Round Robin (eliminados los casos de multinivel)
+        if (nucleo.getPlanificadorActual() instanceof RoundRobinPlanificador) {
             String infoExtra = " | Quantum: " + nucleo.getContadorQuantum() + 
                               "/" + nucleo.getConfiguracion().getQuantumRR();
             lblInfoPlanificador.setText(lblInfoPlanificador.getText().split(" \\| ")[0] + infoExtra);
+        } else {
+            // Limpiar información extra para otros planificadores
+            String textoBase = lblInfoPlanificador.getText().split(" \\| ")[0];
+            lblInfoPlanificador.setText(textoBase);
         }
+        // ELIMINADO: Código para MultinivelPlanificador y MultinivelRealimentacionPlanificador
     }
     
     private void actualizarLog() {
@@ -407,26 +395,7 @@ public class InterfazPrincipal extends JFrame {
     }
     
     public static void main(String[] args) {
-        // Versión simplificada - usar look and feel por defecto
         SwingUtilities.invokeLater(() -> {
-            try {
-                // Intentar usar el look and feel del sistema
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
-            } catch (Exception e) {
-                try {
-                    // Fallback: usar Nimbus si está disponible
-                    for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                        if ("Nimbus".equals(info.getName())) {
-                            UIManager.setLookAndFeel(info.getClassName());
-                            break;
-                        }
-                    }
-                } catch (Exception ex) {
-                    // Si todo falla, usar el look and feel por defecto
-                    System.err.println("No se pudo establecer el look and feel: " + ex.getMessage());
-                }
-            }
-            
             new InterfazPrincipal().setVisible(true);
         });
     }

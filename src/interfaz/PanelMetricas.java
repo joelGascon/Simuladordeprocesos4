@@ -5,7 +5,6 @@
 package interfaz;
 
 import nucleo.NucleoSistema;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,13 +14,14 @@ public class PanelMetricas extends JPanel {
     private JLabel lblEquidad;
     private JLabel lblTiempoRespuesta;
     private JLabel lblProcesosCompletados;
+    private JLabel lblEstadoSemaforos; // NUEVO
     
     public PanelMetricas() {
         inicializarPanel();
     }
     
     private void inicializarPanel() {
-        setLayout(new GridLayout(5, 1));
+        setLayout(new GridLayout(6, 1)); // Aumentado a 6
         setBorder(BorderFactory.createTitledBorder("Métricas del Sistema"));
         
         lblThroughput = new JLabel("Throughput: 0.00");
@@ -29,6 +29,7 @@ public class PanelMetricas extends JPanel {
         lblEquidad = new JLabel("Equidad: 0.00");
         lblTiempoRespuesta = new JLabel("Tiempo Respuesta Promedio: 0.00");
         lblProcesosCompletados = new JLabel("Procesos Completados: 0");
+        lblEstadoSemaforos = new JLabel("Semaforos: CPU[1/1] Mem[0/0]"); // NUEVO
         
         // Estilos
         Font metricFont = new Font("Arial", Font.PLAIN, 12);
@@ -37,12 +38,15 @@ public class PanelMetricas extends JPanel {
         lblEquidad.setFont(metricFont);
         lblTiempoRespuesta.setFont(metricFont);
         lblProcesosCompletados.setFont(metricFont);
+        lblEstadoSemaforos.setFont(new Font("Arial", Font.ITALIC, 10)); // Más pequeño
+        lblEstadoSemaforos.setForeground(Color.DARK_GRAY);
         
         add(lblThroughput);
         add(lblUtilizacionCPU);
         add(lblEquidad);
         add(lblTiempoRespuesta);
         add(lblProcesosCompletados);
+        add(lblEstadoSemaforos); // NUEVO
     }
     
     public void actualizar() {
@@ -58,5 +62,8 @@ public class PanelMetricas extends JPanel {
             nucleo.getMetricas().getTiempoRespuestaPromedio()));
         lblProcesosCompletados.setText(String.format("Procesos Completados: %d", 
             nucleo.getMetricas().getProcesosCompletados()));
+        
+        // Actualizar estado de semáforos
+        lblEstadoSemaforos.setText(nucleo.getGestorColas().getEstadoSemaforos());
     }
 }
