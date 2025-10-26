@@ -54,9 +54,15 @@ public class InterfazPrincipal extends JFrame {
         panelEstados = new PanelEstados();
         panelGraficas = new PanelGraficas();
         
-        // Panel superior (ejecución y control)
+        // Panel superior (ejecución y control - MÁS COMPACTO)
         JPanel panelSuperior = new JPanel(new BorderLayout());
-        panelSuperior.add(panelEjecucion, BorderLayout.CENTER);
+        
+        // Panel izquierdo superior (ejecución y gráficas)
+        JPanel panelIzquierdoSuperior = new JPanel(new BorderLayout());
+        panelIzquierdoSuperior.add(panelEjecucion, BorderLayout.NORTH);
+        panelIzquierdoSuperior.add(panelGraficas, BorderLayout.CENTER);
+        
+        panelSuperior.add(panelIzquierdoSuperior, BorderLayout.CENTER);
         panelSuperior.add(crearPanelControl(), BorderLayout.EAST);
         
         // Panel central izquierdo (colas y estados)
@@ -64,15 +70,13 @@ public class InterfazPrincipal extends JFrame {
         panelCentralIzquierdo.add(panelColas, BorderLayout.CENTER);
         panelCentralIzquierdo.add(panelEstados, BorderLayout.SOUTH);
         
-        // Panel central derecho (log y gráficas)
-        JPanel panelCentralDerecho = new JPanel(new BorderLayout());
-        panelCentralDerecho.add(crearPanelLog(), BorderLayout.CENTER);
-        panelCentralDerecho.add(panelGraficas, BorderLayout.SOUTH);
+        // Panel central derecho (log)
+        JScrollPane panelLog = crearPanelLog();
         
         // Panel central completo
         JPanel panelCentral = new JPanel(new GridLayout(1, 2));
         panelCentral.add(panelCentralIzquierdo);
-        panelCentral.add(panelCentralDerecho);
+        panelCentral.add(panelLog);
         
         // Panel inferior (métricas y configuración)
         JPanel panelInferior = new JPanel(new GridLayout(1, 2));
@@ -94,7 +98,7 @@ public class InterfazPrincipal extends JFrame {
         timer.start();
         
         pack();
-        setSize(1800, 1200);
+        setSize(1800, 1200); // Ventana más grande para acomodar gráficas
         setLocationRelativeTo(null);
     }
     
@@ -294,7 +298,7 @@ public class InterfazPrincipal extends JFrame {
         JPanel panelLog = new JPanel(new BorderLayout());
         panelLog.setBorder(BorderFactory.createTitledBorder("Log de Eventos del Sistema"));
         
-        txtLog = new JTextArea(15, 40); // REDUCIDO para dar espacio a gráficas
+        txtLog = new JTextArea(25, 40);
         txtLog.setEditable(false);
         txtLog.setFont(new Font("Consolas", Font.PLAIN, 11));
         txtLog.setBackground(new Color(253, 246, 227));
@@ -368,6 +372,9 @@ public class InterfazPrincipal extends JFrame {
             if (respuesta == JOptionPane.YES_OPTION) {
                 nucleo.shutdown();
                 nucleo = NucleoSistema.getInstance();
+                if (panelGraficas != null) {
+                    panelGraficas.limpiar();
+                }
                 actualizarEstadoBoton();
                 agregarEventoLog("🔴 SIMULACIÓN DETENIDA - Sistema reiniciado");
                 JOptionPane.showMessageDialog(this, 
@@ -390,6 +397,9 @@ public class InterfazPrincipal extends JFrame {
             if (respuesta == JOptionPane.YES_OPTION) {
                 nucleo.shutdown();
                 nucleo = NucleoSistema.getInstance();
+                if (panelGraficas != null) {
+                    panelGraficas.limpiar();
+                }
                 limpiarLog();
                 actualizarEstadoBoton();
                 agregarEventoLog("🧹 SISTEMA LIMPIADO - Todo reiniciado");
@@ -510,8 +520,8 @@ public class InterfazPrincipal extends JFrame {
             if (panelGraficas != null) panelGraficas.actualizar();
             
             // Actualizar estado del sistema operativo
+            boolean ejecutandoSO = nucleo.isEjecutandoSO();
             if (panelEjecucion != null) {
-                boolean ejecutandoSO = nucleo.isEjecutandoSO();
                 panelEjecucion.actualizarEstadoSO(ejecutandoSO);
             }
             
@@ -530,7 +540,7 @@ public class InterfazPrincipal extends JFrame {
     }
     
     private void actualizarInfoEspecificaPlanificador() {
-        if (lblInfoPlanificador != null && nucleo.getPlanificadorActual() != null) {
+        if (lblInfoPlanificador != null) {
             String textoBase = lblInfoPlanificador.getText().split(" \\| ")[0];
             
             if (nucleo.getPlanificadorActual() instanceof RoundRobinPlanificador) {
@@ -545,7 +555,7 @@ public class InterfazPrincipal extends JFrame {
     
     private void actualizarInfoMemoria() {
         // Buscar el label de memoria en el panel de estado
-        if (lblEstadoSimulacion != null && lblEstadoSimulacion.getParent() instanceof JPanel) {
+        if (lblEstadoSimulacion != null && lblEstadoSimulacion.getParent() != null) {
             Component[] componentes = ((JPanel)lblEstadoSimulacion.getParent()).getComponents();
             for (Component comp : componentes) {
                 if (comp instanceof JLabel && ((JLabel)comp).getText().contains("Memoria")) {
@@ -560,10 +570,10 @@ public class InterfazPrincipal extends JFrame {
     }
     
     private void actualizarLog() {
-        if (txtLog == null) return; // PROTECCIÓN CONTRA NULL
+        if (txtLog == null) return;
         
         java.util.List<Evento> eventos = Logger.getInstance().getEventos();
-        int maxEventos = 30; // REDUCIDO para mejor rendimiento
+        int maxEventos = 40;
         
         if (eventos.size() > maxEventos) {
             eventos = eventos.subList(eventos.size() - maxEventos, eventos.size());

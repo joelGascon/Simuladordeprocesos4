@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/interfaz/PanelColas.java</file>
+            <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/interfaz/PanelProcesoEjecucion.java</file>
+            <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/interfaz/PanelEstados.java</file>
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/persistencia/Logger.java</file>
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/persistencia/GestorConfiguracion.java</file>
+            <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/interfaz/PanelConfiguracion.java</file>
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/nucleo/NucleoSistema.java</file>
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/gestor/GestorHilos.java</file>
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/planificadores/SRTPlanificador.java</file>
@@ -18,7 +22,6 @@
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/gestor/GestorExcepciones.java</file>
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/nucleo/Simulador.java</file>
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/gestor/GestorSemaforos.java</file>
-            <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/</file>
             <file>file:/Users/joelgascon/NetBeansProjects/Simuladordeprocesos4/src/interfaz/PanelGraficas.java</file>
         </group>
     </open-files>

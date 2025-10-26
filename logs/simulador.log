@@ -1,9 +1,2 @@
-[18:19:15] INTERFAZ: 🧹 SISTEMA LIMPIADO - Todo reiniciado - Sistema
-[18:31:19] SISTEMA: Cambiado planificador a: FCFS - Sistema
-[18:32:03] SISTEMA: Cambiado planificador a: FCFS - Sistema
-[18:32:09] MEMORIA: Proceso cargado en memoria - Proceso1 (P1) - PC: 0/10 - Estado: NUEVO
-[18:32:09] SISTEMA: Proceso agregado a cola de listos - Proceso1 (P1) - PC: 0/10 - Estado: LISTO
-[18:32:09] INTERFAZ: ➕ NUEVO PROCESO: Proceso1 (Instrucciones: 10, Tipo: CPU_BOUND) - Sistema
-[18:32:28] SISTEMA: Cambiado planificador a: FCFS - Sistema
-[18:33:13] SISTEMA: Cambiado planificador a: FCFS - Sistema
-[18:33:22] SISTEMA: Cambiado planificador a: FCFS - Sistema
+[19:53:45] INTERFAZ: 🧹 SISTEMA LIMPIADO - Todo reiniciado - Sistema
+[19:54:08] SISTEMA: Cambiado planificador a: RR - Sistema

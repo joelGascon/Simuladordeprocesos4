@@ -1,6 +1,6 @@
 {
   "duracionCiclo": 2064,
-  "tipoPlanificador": "FCFS",
+  "tipoPlanificador": "RR",
   "quantumRR": 4,
   "maxProcesosMemoria": 10
 }
